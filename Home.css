@@ -2,17 +2,21 @@
 <<<<<<< Local Changes
 =======
 <<<<<<< HEAD
+
+h1 {
+	font-family: Calibri;
+}
 body {
 	text-align: center;
 	background-color: green;
 	font-size: 14pt;
-	font-family: Arial;
+	font-family: Calibri;
 	color: yellow;
 }
 
 ul {
 	text-align: center;
-	font-family: Arial;
+	font-family: Calibri;
 	list-style-type: none;
 }
 
@@ -39,7 +43,7 @@ body {
 	text-align: center;
 	background-color: green;
 	font-size: 14pt;
-	font-family: Arial;
+	font-family: Calibri;
 	color: yellow;
 }
 
