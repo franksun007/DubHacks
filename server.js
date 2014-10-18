@@ -1,15 +1,25 @@
-"use strict";
-var http = require("http");
-var port = process.env.PORT || 8080;
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
 
-http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello fellow hackers, ZUP \n\n");
-  response.write("This is the coolest moment of our lives \n\n");
-    response.write("What we need to do.. \n\n");
-    response.write("Is being awesome! \n\n");
-    response.write("And \n\n");
-    response.write("BE A SWAG \n\n");
-    response.write("OR SWAGS  \n\n");
-  response.end();
-}).listen(port);
+app.use(express.static(__dirname + '/client/'));
+app.use(bodyParser());
+
+app.get('/', function (req, res) {
+	res.sendFile(__dirname + '/client/html/login.html');
+});
+
+app.get('/form', function (req, res) {
+	res.sendFile(__dirname + '/client/html/form.html');
+});
+
+app.post('/verify', function (req, res) {
+	var username = req.body.username;
+	var password = req.body.password;
+	res.send(req.body);
+});
+
+app.listen(process.env.PORT || 8080, function(){
+    console.log("Listening on port 8080" );
+});
+
