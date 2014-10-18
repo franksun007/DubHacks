@@ -1,0 +1,21 @@
+body {
+	text-align: center;
+	background-color: green;
+	font-size: 14pt;
+	font-family: Arial;
+	color: yellow;
+}
+
+ul {
+	text-align: center;
+	list-style-type: none;
+}
+
+textarea {
+	background-color: yellow;
+	font-size: 12pt;
+}
+
+#box {
+	margin-top: 15px;
+}
