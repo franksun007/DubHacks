@@ -1,5 +1,5 @@
-function() {
-	this.get_next_moves = function(germs) {
+{
+	"get_next_moves": function(germs) {
 		var command = [];
 		for (var i = 0; i < germs.length; i++) {
 			// surroundings = {"left" : "", "right": "", "up" : "", "down" : ""};
