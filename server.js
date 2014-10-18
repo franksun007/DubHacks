@@ -74,11 +74,13 @@ app.post('/submit', function (req, res){
 	fs.writeFile("client/users/" + username + "/AI.js", code, function (err) {
 		if(err) {
 			console.log(err);
+			redirect("failure.html"); 
 		} else {
 			console.log("file written");
-		}
-		res.redirect("index.html");
+			res.redirect("select.html");
+		}	
 	});
+
 });
 
 app.post('/verify', function (req, res) {
