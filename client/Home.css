@@ -8,7 +8,7 @@ h1 {
 }
 body {
 	text-align: center;
-	background-color: green;
+	background-color: #E2FADE;
 	font-size: 14pt;
 	font-family: Calibri;
 	color: yellow;
@@ -41,17 +41,13 @@ textarea {
 >>>>>>> External Changes
 body {
 	text-align: center;
-	background-color: green;
+	background-color: #E2FADE;
 	font-size: 14pt;
 	font-family: Calibri;
-	color: yellow;
+	color: black;
 }
 
 <<<<<<< Local Changes
-ul {
-	text-align: center;
-	list-style-type: none;
-}
 
 textarea {
 	background-color: yellow;
@@ -69,17 +65,12 @@ textarea {
 	color: ;
 =======
 textarea {
-	background-color: yellow;
+	background-color: #8ADADE;
 	font-size: 12pt;
 >>>>>>> External Changes
 }
 <<<<<<< Local Changes
-</style>
-</head>
-<body>
 
-<h1>My First CSS Example</h1>
-<p>This is a paragraph.</p>
 =======
 >>>>>>> External Changes
 =======
@@ -98,19 +89,15 @@ textarea {
 =======
 body {
 	text-align: center;
-	background-color: green;
+	background-color: #E2FADE;
 	font-size: 14pt;
 	font-family: Arial;
 	color: yellow;
 }
 
-ul {
-	text-align: center;
-	list-style-type: none;
-}
 
 textarea {
-	background-color: yellow;
+	background-color: #8ADADE;
 	font-size: 12pt;
 }
 
