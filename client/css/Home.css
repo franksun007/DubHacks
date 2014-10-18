@@ -1,11 +1,15 @@
-h1 {
+#banner {
 	font-family: Lucida Console;
-	font-size: 40pt;
+	font-size: 25pt;
 	background-color: yellow;
 	padding: 10px;
 	margin-top: 0px;
 	background: linear-gradient(yellow, #E2FADE);
 	padding-bottom: 50px
+}
+
+h1 {
+	margin-top: 10px;
 }
 
 body {
