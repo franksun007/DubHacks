@@ -1,33 +1,96 @@
+<<<<<<< Local Changes
+<<<<<<< Local Changes
+=======
 <<<<<<< HEAD
+body {
+	text-align: center;
+	background-color: green;
+	font-size: 14pt;
+	font-family: Arial;
+	color: yellow;
+}
+
+ul {
+	text-align: center;
+	font-family: Arial;
+	list-style-type: none;
+}
+
+
+
+textarea {
+	background-color: yellow;
+	font-size: 12pt;
+}
+
+#box {
+	margin-top: 15px;
+}
+=======
+=======
+<<<<<<< HEAD
+>>>>>>> External Changes
 <!DOCTYPE html>
 <html>
 <head>
 <style>
+>>>>>>> External Changes
 body {
-    background-color: #E2FADE;
+	text-align: center;
+	background-color: green;
+	font-size: 14pt;
+	font-family: Arial;
+	color: yellow;
 }
 
-h1 {
-    color: #302863;
-    text-align: center;
-    font-family: "Calibri";
-
+<<<<<<< Local Changes
+ul {
+	text-align: center;
+	list-style-type: none;
 }
 
-p {
-    font-family: "Calibri";
-    font-size: 20px;
-    color: 2C3F99
+textarea {
+	background-color: yellow;
+	font-size: 12pt;
+=======
+ul {
+	text-align: center;
+	list-style-type: none;
+>>>>>>> External Changes
 }
+<<<<<<< Local Changes
+
+<<<<<<< Local Changes
+textarea {
+	color: ;
+=======
+textarea {
+	background-color: yellow;
+	font-size: 12pt;
+>>>>>>> External Changes
+}
+<<<<<<< Local Changes
 </style>
 </head>
 <body>
 
 <h1>My First CSS Example</h1>
 <p>This is a paragraph.</p>
+=======
+>>>>>>> External Changes
+=======
+>>>>>>> External Changes
 
+<<<<<<< Local Changes
+#box {
+	margin-top: 15px;
+}=======
 </body>
 </html>
+<<<<<<< Local Changes
+>>>>>>> First Draft CSS
+>>>>>>> External Changes
+=======
 =======
 body {
 	text-align: center;
@@ -51,3 +114,4 @@ textarea {
 	margin-top: 15px;
 }
 >>>>>>> 1ac986032d7f07c67e619066515cbb6271bd11fb
+>>>>>>> External Changes
