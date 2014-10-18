@@ -20,7 +20,7 @@ var Germ = function(x, y, health, team) {
         }
         ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
     }
-}
+};
 
 var Food = function(x, y) {
     this.x = x;
@@ -30,8 +30,8 @@ var Food = function(x, y) {
     this.render = function() {
         ctx.fillStyle = "#FFF";
         ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
-    }
-}
+    };
+};
 
 function to_string(thing, team) {
     if (thing instanceof Germ) {
@@ -73,9 +73,9 @@ var Map = function(germs1, germs2, food, size) {
     this.germs2 = germs2;
     this.food = food;
     this.size = size;
+    that = this;
 
-    this.render = funtion() {
-
+    this.render = function() {
         //TODO draw grid
         
         var germs1 = this.germs1;
@@ -95,9 +95,9 @@ var Map = function(germs1, germs2, food, size) {
         for (var i = 0; i < food.length; i++) {
             food[i].render();
         }
-    }
+    };
 
-    this.get(x, y) {
+    this.get = function(x, y) {
         var germs1 = this.germs1;
         var germs2 = this.germs2;
         var food = this.food;
@@ -123,21 +123,23 @@ var Map = function(germs1, germs2, food, size) {
             }
         }
         return res;
-    }
+    };
 }
 
 var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
     this.map = new Map(germs1, germs2, food, map_size);
     this.AI1 = AI1;
     this.AI2 = AI2;
+    var that = this;
     
     this.render = function() {
-        this.map.render();
-    }
+        that.map.render();
+    };
 
     this.issue_command = function(command, germ) {
         var dx = 0;
         var dy = 0;
+        if (!command) return false;
         if (command["direction"] === "up") {
             dy = -1;
         }
@@ -155,31 +157,32 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
             germ.x += dx;
             germ.y += dy;
         } else if (command["command"] === "split") {
-            return new Germ(germ.x + dx, germ.y + dy, germ.team);
+            germ.health = germ.health / 2;
+            return new Germ(germ.x + dx, germ.y + dy, germ.health / 2, germ.team);
         } 
         return false;
-    }
+    };
 
     this.update = function() {
-        var germs1 = this.map.germs1;
-        var germs2 = this.map.germs2;
+        var germs1 = that.map.germs1;
+        var germs2 = that.map.germs2;
 
-        var commands1 = this.AI1.get_next_moves(convert_germs(germs1, this.map));
-        var commands2 = this.AI2.get_next_moves(convert_germs(germs2, this.map));
+        var commands1 = that.AI1.get_next_moves(convert_germs(germs1, that.map));
+        var commands2 = that.AI2.get_next_moves(convert_germs(germs2, that.map));
 
 
         for (var i = 0; i < germs1.length; i++) {
-            var new_guy = issue_command(commands1[i], germs1[i]);
+            var new_guy = that.issue_command(commands1[i], germs1[i]);
             if (new_guy) germs1.push(new_guy);
         }
-        this.handle_overlaps(germs1, germs2);
+        that.handle_overlaps(germs1, germs2);
         for (var i = 0; i < germs2.length; i++) {
-            var new_guy = issue_command(commands2[i], germs2[i]);
+            var new_guy = that.issue_command(commands2[i], germs2[i]);
             if (new_guy) germs2.push(new_guy);
         }
-        this.handle_overlaps(germs2, germs1);
-        this.render();
-    }
+        that.handle_overlaps(germs2, germs1);
+        that.render();
+    };
 
     this.handle_overlaps = function(my_germs, enemy_germs) {
         var germs1 = my_germs;
@@ -187,8 +190,8 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
         var food = this.map.food;
         for (var i = 0; i < germs1.length; i++) {
             for (var j = 0; j <germs2.length; j++) {
-                if (germs1[i].x == germs2[j].x && germs1[i].y == germs2[i].y) {
-                    fight(germs1[i], germs2[i]);
+                if (germs1[i].x == germs2[j].x && germs1[i].y == germs2[j].y) {
+                    fight(germs1[i], germs2[j]);
                 }
 
             }
@@ -215,8 +218,8 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
                 germs2.splice(i, 1);
             }
         }
-    }
-}
+    };
+};
 
 function fight(germ1, germ2) {
     if (germ1.health > germ2.health) {
@@ -237,29 +240,29 @@ function eat(germ, food) {
 }
 
 // Some test data for testing
-var g1 = [new Germ(0,0,100,1),new Germ(1,0,100,1),new Germ(2,0,100,1)];
-var g2 = [new Germ(0,5,100,2),new Germ(1,5,100,2),new Germ(2,5,100,2)];
+var g1 = [new Germ(10,10,100,1),new Germ(10,15,100,1),new Germ(10,17,100,1)];
+var g2 = [new Germ(15,10,100,2),new Germ(15,15,100,2),new Germ(15,17,100,2)];
 var some_food = [new Food(5, 5)];
-var first_AI = function() {
-    this.get_next_moves = function(germs) {
+var first_AI = {
+    "get_next_moves": function(germs) {
         var command = [];
         for (var i = 0; i < germs.length; i++) {
             var direction = ["left", "right", "up", "down"];
-            var action = ["move", "split"];
-            var actionindex = parseInt(Math.random() * 2);
+            var action = ["move"];
+            var actionindex = parseInt(Math.random() * 1);
             var directionindex = parseInt(Math.random() * 4);
             command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
         }
         return command;
     }
 };
-var second_AI = function() {
-    this.get_next_moves = function(germs) {
+var second_AI = {
+    "get_next_moves": function(germs) {
         var command = [];
         for (var i = 0; i < germs.length; i++) {
             var direction = ["left", "right", "up", "down"];
-            var action = ["move", "split"];
-            var actionindex = parseInt(Math.random() * 2);
+            var action = ["move"];
+            var actionindex = parseInt(Math.random() * 1);
             var directionindex = parseInt(Math.random() * 4);
             command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
         }
@@ -269,5 +272,5 @@ var second_AI = function() {
  
 var gs = new GameServer(g1, g2, some_food, first_AI, second_AI, 20);
 
-setInterval(gs.update, 1000/30);
+setInterval(gs.update, 1000);
 
