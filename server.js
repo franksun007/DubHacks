@@ -46,13 +46,14 @@ app.post('/register', function (req, res) {
 			fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
 				if (err2) {
 					console.log(err2);
+					res.redirect("register.html");
 				} else {
 					console.log("file written");
+					res.redirect("login.html");
 				}
 			});
 		}
 	});
-	res.send(req.body);
 });
 
 app.post('/verify', function (req, res) {
@@ -72,7 +73,6 @@ app.post('/verify', function (req, res) {
                     console.log(password);
                     console.log(data);
 					if (password == data){
-                        req.method = 'get';
                         res.redirect('index.html');
 					} else {
 						console.log("wrong password");
