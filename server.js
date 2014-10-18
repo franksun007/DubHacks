@@ -147,6 +147,7 @@ app.post('/verify', function (req, res) {
 	fs.readdir("client/users/" + username, function(err) {
 		if(err) {
 			console.log(err);
+			res.redirect("login.html");
 		} else {
 			console.log("checking the password");
 			fs.readFile("client/users/" + username + "/password.txt",'utf8', function(err2, data){
