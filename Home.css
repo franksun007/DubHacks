@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color: #E2FADE;
+}
+
+h1 {
+    color: #302863;
+    text-align: center;
+    font-family: "Calibri";
+
+}
+
+p {
+    font-family: "Calibri";
+    font-size: 20px;
+    color: 2C3F99
+}
+</style>
+</head>
+<body>
+
+<h1>My First CSS Example</h1>
+<p>This is a paragraph.</p>
+
+</body>
+</html>
