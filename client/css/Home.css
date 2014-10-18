@@ -1,5 +1,17 @@
 h1 {
-	font-family: Calibri;
+	font-family: Lucida Console;
+	font-size: 40pt;
+	background-color: yellow;
+	padding: 10px;
+	
+}
+
+#logo1 {
+	padding-left: 50px;
+}
+
+#logo2 {
+
 }
 
 body {
