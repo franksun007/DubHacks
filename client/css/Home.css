@@ -8,8 +8,9 @@
 	padding-bottom: 50px
 }
 
-h1 {
+h1, title {
 	margin-top: 10px;
+	font-family: Chiller;
 }
 
 #rules {

@@ -4,6 +4,7 @@
 		request.open("GET", "links.txt", true);
 		request.send();
 		request.onload = injectLinks;
+		document.getElementById("battle").onclick = battle;
 	}
 
 	function injectLinks() {
@@ -14,6 +15,10 @@
 			link.innerHTML = links[i];
 			linkDropDown.appendChild(link);
 		}
+	}
+
+	function battle() {
+		window.location = "battle/" + document.getElementById("links").value;
 	}
 
 
