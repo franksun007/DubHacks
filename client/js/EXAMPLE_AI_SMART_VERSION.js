@@ -6,10 +6,10 @@ function() {
 			if(germs[i].surroundings["up"] === "food") {
 				command[i] = {"command":"move", "direction":"up"};
 			}
-			else if(germs[i].surroundings["up"] === "germs") {
+			else if(germs[i].surroundings["up"] === "enemy") {
 				command[i] = {"command":"move", "direction":"down"};
 			}
-			else if(germs[i].surroundings["down"] === "germs") {
+			else if(germs[i].surroundings["down"] === "enemy") {
 				command[i] = {"command":"move", "direction":"down"};			
 			}
 			else if(germs[i].surroundings["right"] === "food") {
@@ -21,10 +21,10 @@ function() {
 			else if(germs[i].surroundings["down"] === "food") {
 				command[i] = {"command":"move", "direction":"down"}; 			
 			}
-			else if(germs[i].surroundings["right"] === "germs") {
+			else if(germs[i].surroundings["right"] === "enemy") {
 				command[i] = {"command":"move", "direction":"right"}; 			
 			}
-			else if(germs[i].surroundings["left"] === "germs") {
+			else if(germs[i].surroundings["left"] === "enemy") {
 				command[i] = {"command":"move", "direction":"right"}; 			
 			}
 			else {

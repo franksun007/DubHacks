@@ -142,17 +142,20 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
         var dx = 0;
         var dy = 0;
         if (!command) return false;
-        if (command["direction"] === "up") {
+        if (command["direction"] === "up" && germ.y - 1 >= 0) {
             dy = -1;
         }
-        else if (command["direction"] === "down") {
+        else if (command["direction"] === "down" && germ.y + 1< MAX_Y) {
             dy = 1;
         }
-        else if (command["direction"] === "left") {
+        else if (command["direction"] === "left" && germ.x - 1 >= 0) {
             dx = -1;
         }
-        else if (command["direction"] === "right") {
+        else if (command["direction"] === "right" && germ.x + 1 < MAX_X) {
             dx = 1;
+        }
+        if (dx == 0 && dy == 0) {
+            return false;
         }
 
         if (command["command"] === "move") {
@@ -171,9 +174,12 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
         var germs1 = that.map.germs1;
         var germs2 = that.map.germs2;
 
+        if (Math.random() < 0.01) {
+            that.map.food.push(new Food(parseInt(Math.random()*MAX_X), parseInt(Math.random()*MAX_Y)));
+        }
+
         var commands1 = that.AI1.get_next_moves(convert_germs(germs1, that.map));
         var commands2 = that.AI2.get_next_moves(convert_germs(germs2, that.map));
-
 
         for (var i = 0; i < germs1.length; i++) {
             var new_guy = that.issue_command(commands1[i], germs1[i]);
@@ -191,7 +197,7 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
     this.handle_overlaps = function(my_germs, enemy_germs) {
         var germs1 = my_germs;
         var germs2 = enemy_germs;
-        var food = this.map.food;
+        var food = that.map.food;
         for (var i = 0; i < germs1.length; i++) {
             for (var j = 0; j <germs2.length; j++) {
                 if (germs1[i].x == germs2[j].x && germs1[i].y == germs2[j].y) {
