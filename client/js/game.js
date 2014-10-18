@@ -18,7 +18,7 @@ var Germ = function(x, y, health, team) {
         if (team == 1) {
             ctx.fillStyle = "#0F0";
         } else {
-            ctx.fillStyle = "#00F";
+            ctx.fillStyle = "#F00";
         }
         ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
     }
@@ -253,34 +253,8 @@ function eat(germ, food) {
 var g1 = [new Germ(10,10,100,1),new Germ(10,15,100,1),new Germ(10,17,100,1)];
 var g2 = [new Germ(15,10,100,2),new Germ(15,15,100,2),new Germ(15,17,100,2)];
 var some_food = [new Food(5, 5)];
-var first_AI = {
-    "get_next_moves": function(germs) {
-        var command = [];
-        for (var i = 0; i < germs.length; i++) {
-            var direction = ["left", "right", "up", "down"];
-            var action = ["move", "split"];
-            var actionindex = parseInt(Math.random() * 2);
-            var directionindex = parseInt(Math.random() * 4);
-            command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
-        }
-        return command;
-    }
-};
-var second_AI = {
-    "get_next_moves": function(germs) {
-        var command = [];
-        for (var i = 0; i < germs.length; i++) {
-            var direction = ["left", "right", "up", "down"];
-            var action = ["move", "split"];
-            var actionindex = parseInt(Math.random() * 2);
-            var directionindex = parseInt(Math.random() * 4);
-            command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
-        }
-        return command;
-    }
-};
  
-var gs = new GameServer(g1, g2, some_food, first_AI, second_AI, 20);
+var gs = new GameServer(g1, g2, some_food, AI1, AI2, 20);
 
 setInterval(gs.update, 1000/30);
 

@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var handlebars = require("handlebars");
 
 app.use(express.static(__dirname + '/client/'));
 app.use(bodyParser());
@@ -14,6 +15,13 @@ app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/client/html/index_unlogin.html');
 });
 
+app.get('/client/users/:username/:AI/:num', function (req, res) {
+    fs.readFile('client/users/' + req.params.username + "/" + req.params.AI,'utf8', function(err, data) {
+        data = "var AI" + req.params.num + " = " + data;
+        res.send(data);
+    });
+});
+
 app.get('/form', function (req, res) {
 	res.sendFile(__dirname + '/client/html/form.html');
 });
@@ -22,12 +30,26 @@ app.get('/login.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/login.html');
 });
 
+app.get('/battle/:enemy', function(req, res) {
+    fs.readFile('client/html/battle.html', 'utf8', function(err, data) {
+        var template = handlebars.compile(data);
+        console.log(req.session.username);
+        var stuff = {'myname':req.session.username, 'enemy':req.params.enemy};
+        var result = template(stuff);
+        res.send(result);
+    });
+});
+
 app.get('/register.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/register.html');
 });
 
 app.get('/index.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/index.html');
+});
+
+app.get('/js/:filename', function(req, res) {
+    res.sendFile('client/js/' + req.params.filename);
 });
 
 app.get('/loadLinks.js', function (req, res) {
