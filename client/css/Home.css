@@ -32,8 +32,7 @@ ul {
 	text-align: justify;
 	font-family: Calibri;
 	list-style-type: none;
-	width: 800px;
-	padding-left: 0px;
+	float: center;
 }
 
 p {
