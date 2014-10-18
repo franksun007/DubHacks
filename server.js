@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var session = require('cookie-session');
 
 app.use(express.static(__dirname + '/client/'));
 app.use(bodyParser());
@@ -33,6 +34,8 @@ app.post('/register', function (req, res) {
 	console.log("fields set");
 	if (password == rePassword) {
 		console.log("hooray!");
+	} else {
+		res.redirect("register.html");
 	}
 	password = hash(password);
 	console.log("register passwd:" + password);
@@ -73,7 +76,11 @@ app.post('/verify', function (req, res) {
 				} else {
                     console.log(password);
                     console.log(data);
-					if (password == data){
+					if (password == data) {
+						app.use(session({
+							keys: [username],
+							secureProxy: true
+						}));
                         res.redirect('index.html');
 					} else {
 						console.log("wrong password");
