@@ -20,7 +20,7 @@ body {
 }
 
 textarea {
-	background-color: #8ADADE;
+	background-color: white;
 	font-size: 12pt;
 	color: #8ADADE;
 }
@@ -29,12 +29,6 @@ ul {
 	color: black;
 	text-align: center;
 	list-style-type: none;
-}
-
-
-textarea {
-	color: #8ADADE;
-	font-size: 12pt;
 }
 
 #box {
