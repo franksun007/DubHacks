@@ -30,6 +30,15 @@ app.get('/index.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/index.html');
 });
 
+app.get('/loadLinks.js', function (req, res) {
+	res.sendFile(__dirname + '/client/js/loadLinks.js');
+});
+
+app.get('/links.txt', function (req, res) {
+	console.log(__dirname + '/server/links.txt');
+	res.sendFile(__dirname + '/server/links.txt');
+});
+
 app.get('/select', function (req, res) {
 	fs.readdir('client/users/', function (err, links) {
 		if (err) {
