@@ -17,17 +17,18 @@ app.get('/form', function (req, res) {
 app.post('/verify', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
-	fs.mkdir(username, function(err) {
+	password = hash(password);
+	console.log("making directory " + username);
+	fs.mkdir("client/users/" + username, function(err) {
 		if (err) {
 			console.log(err);
 		} else {
-			fs.open("password.txt", "w+", function(err2) {
+			console.log("creating password.txt");
+			fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
 				if (err2) {
 					console.log(err2);
 				} else {
-					fs.writeFile("password.txt", password, function(err3) {
-						console.log("file written");
-					});
+					console.log("file written");
 				}
 			});
 		}
@@ -38,4 +39,17 @@ app.post('/verify', function (req, res) {
 app.listen(process.env.PORT || 8080, function(){
     console.log("Listening on port 8080" );
 });
+
+function hash(string) {
+	var hash = 0, i, chr, len;
+	if (string.length == 0) {
+  		return hash;	
+	}
+ 	for (i = 0, len = string.length; i < len; i++) {
+	    chr   = string.charCodeAt(i);
+	    hash  = ((hash << 5) - hash) + chr;
+	    hash |= 0; // Convert to 32bit integer
+ 	}
+  	return hash;
+}
 
