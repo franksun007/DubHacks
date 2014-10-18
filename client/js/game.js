@@ -20,7 +20,30 @@ var Germ = function(x, y, health, team) {
         } else {
             ctx.fillStyle = "#F00";
         }
-        ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
+        // body
+        ctx.beginPath();
+        ctx.arc(this.x*SIZE + SIZE/2, this.y*SIZE + SIZE/2, SIZE/2, 0, Math.PI*2, true); 
+        ctx.closePath();
+        ctx.fill();
+
+
+        //left eye
+        ctx.fillStyle = "#000";
+        ctx.beginPath();
+        ctx.arc(this.x*SIZE + 5, this.y*SIZE + 5, SIZE/8, 0, Math.PI*2, true); 
+        ctx.closePath();
+        ctx.fill();
+        //right eye
+        ctx.beginPath();
+        ctx.arc(this.x*SIZE + SIZE - 5, this.y*SIZE + 5, SIZE/8, 0, Math.PI*2, true); 
+        ctx.closePath();
+        ctx.fill();
+
+        // mouth
+        ctx.beginPath();
+        ctx.arc(this.x*SIZE + SIZE/2, this.y*SIZE + SIZE/2, SIZE/2 - 2, Math.PI, Math.PI*2, true); 
+        ctx.closePath();
+        ctx.stroke();
     }
 };
 
@@ -31,7 +54,10 @@ var Food = function(x, y) {
 
     this.render = function() {
         ctx.fillStyle = "#FFF";
-        ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
+        ctx.beginPath();
+        ctx.arc(this.x*SIZE + SIZE/2, this.y*SIZE + SIZE/2, SIZE/2, 0, Math.PI*2, true); 
+        ctx.closePath();
+        ctx.fill();
     };
 };
 
