@@ -16,6 +16,7 @@
         </div>
         <div>
             <button id="start">START</button>
+            <button id="stop" disabled="true">ESCAPE (YOU KNOW YOU WILL LOSE)</button>
         </div>
         <div>
             <canvas id="canvas" width="800" height="600"></canvas>
@@ -28,7 +29,15 @@
             document.getElementById("start").onclick = function() {
                 setInterval(gs.update, 1000/30);
                 document.getElementById("start").innerHTML = "SPEEDING UP";
+                document.getElementById("stop").removeAttribute('disabled');
             };
+        </script>
+        <script>
+            document.getElementById("stop").onclick = function() {
+                setInterval(gs.update, 9999999999/ 30);
+                document.getElementById("start").setAttribute('disabled', 'disabled');
+                document.getElementById("stop").setAttribute('disabled', 'disabled');
+            }
         </script>
     </body>
 
