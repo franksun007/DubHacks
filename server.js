@@ -71,15 +71,16 @@ app.get('/select', function (req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			fs.writeFile('server/links.txt', links);
-			//for (var i = 0; i < links.length; i++) {
-				
-			//	fs.appendFileSync('server/links.txt', link); 
-			//}
-			res.sendFile(__dirname + '/client/html/select.html');
+			fs.readFile('client/html/select.html', 'utf8', function(err, data) {
+		        var template = handlebars.compile(data);
+		        console.log(req.session.username);
+				var stuff = {"usernames":links};
+		        var result = template(stuff);
+		        res.send(result);
+  			});
 		}
-	})
-})
+	});
+});
 
 // for registration
 app.post('/register', function (req, res) {

@@ -14,7 +14,9 @@
 		<h2> Select an Opponent </h2>
 
 		<select id="links">
-			<!--- Write names from file, how?? -->
+		{{#each usernames}}
+			<option>{{this}}</option>
+		{{/each}}
 		</select>
 		<button id="battle">BATTLE</button>
 	</body>
