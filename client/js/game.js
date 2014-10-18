@@ -272,5 +272,5 @@ var second_AI = {
  
 var gs = new GameServer(g1, g2, some_food, first_AI, second_AI, 20);
 
-setInterval(gs.update, 1000);
+setInterval(gs.update, 1000/30);
 
