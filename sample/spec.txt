@@ -1,0 +1,17 @@
+This is two sample files that you can see how everything works.
+
+For package.json:
+
+This is used to install the dependencies for our page.
+Like if we need express.
+
+For server.js:
+
+A bounch of shit is what we don't need.
+Try to simplify it as simplified as possible.
+Or
+Make things work is fine!.
+
+Good luck man.
+
+If you have questions just ask Jacob, StackOverflow or me.
