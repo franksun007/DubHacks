@@ -64,10 +64,14 @@ app.post('/register', function (req, res) {
 });
 
 app.post('/submit', function (req, res){
-	var username = req.session.username;
+	if (req.session.username) {
+		var username = req.session.username;
+	} else {
+		console.log("no cookie set");
+	}
 	var code = req.body.code;
 	console.log("fields set");
-	fs.writeFile("/client/users/" + username + "/AI.js", code, function (err) {
+	fs.writeFile("client/users/" + username + "/AI.js", code, function (err) {
 		if(err) {
 			console.log(err);
 		} else {
@@ -93,9 +97,9 @@ app.post('/verify', function (req, res) {
                     console.log(password);
                     console.log(data);
 					if (password == data) {
-                        res.redirect('index.html');
                         req.session.username = username;
                         console.log("stored " + req.session.username);
+                        res.redirect('index.html');
 					} else {
 						console.log("wrong password");
                         res.redirect("login.html");
