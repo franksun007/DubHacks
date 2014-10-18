@@ -41,7 +41,7 @@ app.get('/select', function (req, res) {
 				} else {
 					console.log("links are up! Yay!");
 					console.log(links);
-					res.redirect("client/html/select.html");
+					res.sendFile(__dirname + '/client/html/select.html');
 				}
 			})
 		}
