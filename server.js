@@ -7,11 +7,19 @@ app.use(express.static(__dirname + '/client/'));
 app.use(bodyParser());
 
 app.get('/', function (req, res) {
-	res.sendFile(__dirname + '/client/html/login.html');
+	res.sendFile(__dirname + '/client/html/index_unlogin.html');
 });
 
 app.get('/form', function (req, res) {
 	res.sendFile(__dirname + '/client/html/form.html');
+});
+
+app.get('/login.html', function (req, res) {
+	res.sendFile(__dirname + '/client/html/login.html');
+});
+
+app.get('/register.html', function (req, res) {
+	res.sendFile(__dirname + '/client/html/register.html');
 });
 
 app.post('/register', function (req, res) {
@@ -33,6 +41,31 @@ app.post('/register', function (req, res) {
 			});
 		}
 	});
+	res.send(req.body);
+});
+
+app.post('/verify', function (req, res) {
+	var username = req.body.username;
+	var password = req.body.password;
+	password = hash(password);
+	fs.readdir("client/users/" + username, function(err) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log("checking the password");
+			passwordInStore = fs.open("client/users/" + username + "/password.txt", 'r', function(err2){
+				if(err2) {
+					console.log(err2);
+				} else {
+					if (password == passwordInStore){
+						res.sendFile(__dirname + '/client/html/index.html');
+					} else {
+						console.log("wrong password");
+					}
+				}
+			});
+		}
+	}); 
 	res.send(req.body);
 });
 
