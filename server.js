@@ -41,6 +41,7 @@ app.post('/register', function (req, res) {
 	fs.mkdir("client/users/" + username, function(err) {
 		if (err) {
 			console.log(err);
+			res.redirect("register.html");
 		} else {
 			console.log("creating password.txt");
 			fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
