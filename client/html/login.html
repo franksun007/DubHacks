@@ -10,8 +10,12 @@
 			<img src="https://raw.githubusercontent.com/PhearTheCeal/DubHacks/master/client/logo.png" alt="logo" height="200" width="200">
 			<h1>GermaCodia</h1>
 			<legend>Login</legend>
-			<label>Username: <input type="text" name="username" /></label>
-			<label>Password: <input type="password" name="password" /></label>
-			<input type="submit" value="Login" />
+			<!--<label>Username: <input type="text" name="username" /></label>
+			<label>Password: <input type="password" name="password" /></label>-->
+			<form name="login" action="verify.js" method="post">
+				Username: <input type="text" name="username">
+				Password: <input type="password" name="password">
+				<input type="submit" value="Login" />
+			</form>
 		</body>
 	</html>
