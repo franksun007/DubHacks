@@ -1,7 +1,7 @@
 function() {
 	this.get_next_moves = function(germs) {
 		var command = [];
-		for (var i; i < germs.length; i++) {
+		for (var i = 0; i < germs.length; i++) {
 			// surroundings = {"left" : "", "right": "", "up" : "", "down" : ""};
 			var direction = {"left", "right", "up", "down"};
 			var action = {"move", "split"};
@@ -11,5 +11,4 @@ function() {
 		}
 		return command;
 	}
-
 }
