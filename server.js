@@ -22,10 +22,15 @@ app.get('/register.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/register.html');
 });
 
+app.get('/index.html', function (req, res) {
+	res.sendFile(__dirname + '/client/html/index.html');
+});
+
 app.post('/register', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	password = hash(password);
+	console.log("register passwd:" + password);
 	console.log("making directory " + username);
 	fs.mkdir("client/users/" + username, function(err) {
 		if (err) {
@@ -48,27 +53,29 @@ app.post('/verify', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	password = hash(password);
+	console.log("verify passwd:" + password);
 	fs.readdir("client/users/" + username, function(err) {
 		if(err) {
 			console.log(err);
 		} else {
 			console.log("checking the password");
-			passwordInStore = fs.open("client/users/" + username + "/password.txt", 'r', function(err2){
+			fs.readFile("client/users/" + username + "/password.txt",'utf8', function(err2, data){
 				if(err2) {
 					console.log(err2);
 				} else {
                     console.log(password);
-                    console.log(passwordInStore);
-					if (password == passwordInStore){
-						res.sendFile(__dirname + '/client/html/index.html');
+                    console.log(data);
+					if (password == data){
+                        req.method = 'get';
+                        res.redirect('index.html');
 					} else {
 						console.log("wrong password");
+                        res.redirect("login.html");
 					}
 				}
 			});
 		}
 	}); 
-	res.send(req.body);
 });
 
 app.listen(process.env.PORT || 8080, function(){
