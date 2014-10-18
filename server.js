@@ -17,6 +17,8 @@ app.post('/verify', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	res.send(req.body);
+
+app.listen(process.env.PORT || 8080, function(){
+    console.log("Listening on port 8080" );
 });
 
-app.listen(process.env.PORT || 8080);
