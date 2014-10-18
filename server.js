@@ -32,20 +32,22 @@ app.post('/register', function (req, res) {
 	password = hash(password);
 	console.log("register passwd:" + password);
 	console.log("making directory " + username);
-	fs.mkdir("client/users/" + username, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log("creating password.txt");
-			fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
-				if (err2) {
-					console.log(err2);
-				} else {
-					console.log("file written");
-				}
-			});
-		}
-	});
+	dropBox(username, password);
+
+	// fs.mkdir("client/users/" + username, function(err) {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		console.log("creating password.txt");
+	// 		fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
+	// 			if (err2) {
+	// 				console.log(err2);
+	// 			} else {
+	// 				console.log("file written");
+	// 			}
+	// 		});
+	// 	}
+	// });
 	res.send(req.body);
 });
 
@@ -95,3 +97,61 @@ function hash(string) {
   	return hash;
 }
 
+// DROPBOX CODE
+// =============
+
+function dropBox(username, password) {
+	var Session = require("temboo/core/temboosession");
+	var Utilities = require("temboo/Library/Utilities/Encoding");
+	var Dropbox = require("temboo/Library/Dropbox/FilesAndMetadata");
+	
+	var session = new Session.TembooSession("Germa Codia", "User File Storage Thingy", "faz1ufufxe0v27g");
+	
+	// Set up the encoding choreo.
+	var base64EncodeChoreo = new Utilities.Base64Encode(session);
+	// Instantiate and populate the input set for the choreo
+	var base64EncodeInputs = base64EncodeChoreo.newInputSet();
+	// Set the file's contents. 
+	base64EncodeInputs.set_Text(password);
+	
+	// Execute the choreo to base64 encode your text.
+	// If the choreo succeeds, the upload function will be triggered as a callback.
+	base64EncodeChoreo.execute(
+	    base64EncodeInputs,
+	    function(results) {
+	        uploadEncodedFile(results.get_Base64EncodedText());
+	    },
+	    function(error) {
+	        console.log(error.type); 
+	        console.log(error.message);
+	    }
+	);
+
+	// Function to call on encode success to upload file to Dropbox.
+	function uploadEncodedFile(fileContents) {
+	    var uploadFileChoreo = new Dropbox.UploadFile(session);
+	    var dateString = new Date().toISOString().replace(/\..+/, '');
+	    var fileName = ["users/", username, "/password.txt"].join("");
+
+	    // Instantiate and populate the input set for the choreo
+	    var uploadFileInputs = uploadFileChoreo.newInputSet();
+	    // Set to the name of the Profile you created earlier in the tutorial
+	    uploadFileInputs.setCredential("Germacodia");
+
+	    // Set inputs.
+	    uploadFileInputs.set_FileName(fileName);
+	    uploadFileInputs.set_FileContents(fileContents);
+
+	    // Run the choreo, specifying success and error callback handlers.
+	    uploadFileChoreo.execute(
+	        uploadFileInputs,
+	        function(results){
+	            console.log(results.get_Response());
+	        },
+	        function(error) {
+	            console.log(error.type); 
+	            console.log(error.message);
+	        }
+	    );
+	}
+}
