@@ -21,6 +21,7 @@ var GermState = function(germ, map) {
     this.x = germ.x;
     this.y = germ.y;
     this.health = germ.health;
+    this.team = germ.team;
     //TODO this.surroundings = {}
 }
 
@@ -32,36 +33,19 @@ function convert_germs(germs, map) {
     return new_germs;
 }
 
-var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
+var Map = function(germs1, germs2, food, size) {
     this.germs1 = germs1;
     this.germs2 = germs2;
     this.food = food;
-    this.AI1 = AI1;
-    this.AI2 = AI2;
-    
-    this.map = [];
-    for (var i = 0; i < map_size; i++) {
-        this.map[i] = [];
-        for (var j = 0; j < map_size; j++) {
-            this.map[j] = []; // this array will hold all the shit at this position
-            for (var g1 in germs1) {
-                var g = germs1[g1];
-                if (i == g.x && j == g.y) {
-                    this.map[j].push(g);
-                }
-            }
-            for (var g2 in germs2) {
-                var g = germs2[g2];
-                if (i == g.x && j == g.y) {
-                    this.map[j].push(g);
-                }
-            }
-        }
-    }
-    
+    this.size = size;
+
     this.render = funtion() {
 
         //TODO draw grid
+        
+        var germs1 = this.germs1;
+        var germs2 = this.germs2;
+        var food = this.food;
 
         ctx.fillStyle = "#0FF";
         ctx.fillRect(0,0,WIDTH,HEIGHT);
@@ -76,6 +60,44 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
         for (var i = 0; i < food.length; i++) {
             food[i].render();
         }
+    }
+
+    this.get(x, y) {
+        var germs1 = this.germs1;
+        var germs2 = this.germs2;
+        var food = this.food;
+
+        var res = [];
+
+        for (var g1 in germs1) {
+            var g = germs1[g1];
+            if (x == g.x && y == g.y) {
+                res.push(g);
+            }
+        }
+        for (var g2 in germs2) {
+            var g = germs2[g2];
+            if (x == g.x && y == g.y) {
+                res.push(g);
+            }
+        }
+        for (var fi in food) {
+            var f = food[fi];
+            if (x == f.x && y == f.y) {
+                res.push(f);
+            }
+        }
+        return res;
+    }
+}
+
+var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
+    this.map = new Map(germs1, germs2, food, map_size);
+    this.AI1 = AI1;
+    this.AI2 = AI2;
+    
+    this.render = function() {
+        this.map.render();
     }
 
     this.issue_command = function(command, germ) {
@@ -95,14 +117,17 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
         }
 
         if (command["command"] === "move") {
+            germ.x += dx;
+            germ.y += dy;
+            //TODO modify map
         } else if (command["command"] === "split") {
-
+            //TODO
         } 
     }
 
     this.update = function() {
-        var commands1 = AI1.get_next_moves(convert_germs(germs1, this.map));
-        var commands2 = AI2.get_next_moves(convert_germs(germs2, this.map));
+        var commands1 = this.AI1.get_next_moves(convert_germs(this.map.germs1, this.map));
+        var commands2 = this.AI2.get_next_moves(convert_germs(this.map.germs2, this.map));
 
         for (var i = 0; i < germs1.length; i++) {
             issue_command(commands1[i], germs1[i]);
@@ -113,15 +138,9 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
     }
 }
 
-var AI = function() {
-    this.get_next_moves = function(germs) {
-        
-    }
-}
-
 function main() {
-    
+    //TODO
 }
 
-setInterval(render, 1000/30);
+setInterval(main, 1000/30);
 
