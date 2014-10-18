@@ -69,7 +69,7 @@ app.post('/submit', function (req, res){
 	} else {
 		console.log("no cookie set");
 	}
-	var code = req.body.code;
+	var code = req.body.userCode;
 	console.log("fields set");
 	fs.writeFile("client/users/" + username + "/AI.js", code, function (err) {
 		if(err) {
