@@ -77,6 +77,7 @@ app.post('/submit', function (req, res){
 		} else {
 			console.log("file written");
 		}
+		res.redirect("index.html");
 	});
 });
 
