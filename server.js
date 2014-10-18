@@ -73,7 +73,7 @@ app.post('/submit', function (req, res){
 		} else {
 			console.log("file written");
 		}
-	})
+	});
 });
 
 app.post('/verify', function (req, res) {
