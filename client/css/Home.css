@@ -1,11 +1,7 @@
-<<<<<<< Local Changes
-<<<<<<< Local Changes
-=======
-<<<<<<< HEAD
-
 h1 {
 	font-family: Calibri;
 }
+
 body {
 	text-align: center;
 	background-color: #E2FADE;
@@ -19,8 +15,6 @@ ul {
 	font-family: Calibri;
 	list-style-type: none;
 }
-
-
 
 textarea {
 	background-color: black;
@@ -30,79 +24,3 @@ textarea {
 #box {
 	margin-top: 15px;
 }
-=======
-=======
-<<<<<<< HEAD
->>>>>>> External Changes
-<!DOCTYPE html>
-<html>
-<head>
-<style>
->>>>>>> External Changes
-body {
-	text-align: center;
-	background-color: #E2FADE;
-	font-size: 14pt;
-	font-family: Calibri;
-	color: black;
-}
-
-<<<<<<< Local Changes
-
-textarea {
-	background-color: yellow;
-	font-size: 12pt;
-=======
-ul {
-	text-align: center;
-	list-style-type: none;
->>>>>>> External Changes
-}
-<<<<<<< Local Changes
-
-<<<<<<< Local Changes
-textarea {
-	color: ;
-=======
-textarea {
-	background-color: #8ADADE;
-	font-size: 12pt;
->>>>>>> External Changes
-}
-<<<<<<< Local Changes
-
-=======
->>>>>>> External Changes
-=======
->>>>>>> External Changes
-
-<<<<<<< Local Changes
-#box {
-	margin-top: 15px;
-}=======
-</body>
-</html>
-<<<<<<< Local Changes
->>>>>>> First Draft CSS
->>>>>>> External Changes
-=======
-=======
-body {
-	text-align: center;
-	background-color: #E2FADE;
-	font-size: 14pt;
-	font-family: Arial;
-	color: yellow;
-}
-
-
-textarea {
-	background-color: #8ADADE;
-	font-size: 12pt;
-}
-
-#box {
-	margin-top: 15px;
-}
->>>>>>> 1ac986032d7f07c67e619066515cbb6271bd11fb
->>>>>>> External Changes
