@@ -2,10 +2,13 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var fs = require('fs');
-var session = require('cookie-session');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
 
 app.use(express.static(__dirname + '/client/'));
 app.use(bodyParser());
+app.use(cookieParser());
+app.use(session({secret: 'secretcookieooooooooh2spooky'}));
 
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/client/html/index_unlogin.html');
@@ -90,11 +93,9 @@ app.post('/verify', function (req, res) {
                     console.log(password);
                     console.log(data);
 					if (password == data) {
-						app.use(session({
-							keys: [username],
-							secureProxy: true
-						}));
                         res.redirect('index.html');
+                        req.session.username = username;
+                        console.log("stored " + req.session.username);
 					} else {
 						console.log("wrong password");
                         res.redirect("login.html");
