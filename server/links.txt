@@ -1,1 +1,1 @@
-.DS_Store,Courtney,Hunter,chenfs,dmcoley,hschafer,hunter1,jake,jake3,stephshi,test,test2,thenewjake,username
+chenfs,Courtney,dmcoley,Hunter,hunter1,jake,jake3,stephshi,test2,thenewjake,username

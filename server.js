@@ -67,15 +67,11 @@ app.get('/select', function (req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			fs.writeFile('server/links.txt', links, function (err) {
-				if (err) {
-					console.log(err);
-				} else {
-					console.log("links are up! Yay!");
-					console.log(links);
-					res.sendFile(__dirname + '/client/html/select.html');
-				}
-			})
+			for (var i = 0; i < links.length; i++) {
+				
+				fs.appendFileSync('server/links.txt', link); 
+			}
+			res.sendFile(__dirname + '/client/html/select.html');
 		}
 	})
 })
@@ -86,32 +82,32 @@ app.post('/register', function (req, res) {
 	var password = req.body.password;
 	var rePassword = req.body.rePassword;
 	console.log("fields set");
-	if (password == rePassword) {
-		console.log("hooray!");
+	if (password != rePassword) {
+		res.sendFile(__dirname + "/client/html/register.html");
 	} else {
-		res.redirect("register.html");
-	}
-	password = hash(password);
-	console.log("register passwd:" + password);
-	console.log("making directory " + username);
+		console.log("hooray!");
+		password = hash(password);
+		console.log("register passwd:" + password);
+		console.log("making directory " + username);
 
-	fs.mkdir("client/users/" + username, function(err) {
-		if (err) {
-			console.log(err);
-			res.redirect("register.html");
-		} else {
-			console.log("creating password.txt");
-			fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
-				if (err2) {
-					console.log(err2);
-					res.redirect("register.html");
-				} else {
-					console.log("file written");
-					res.redirect("login.html");
-				}
-			});
-		}
-	});
+		fs.mkdir("client/users/" + username, function(err) {
+			if (err) {
+				console.log(err);
+				res.redirect("register.html");
+			} else {
+				console.log("creating password.txt");
+				fs.writeFile("client/users/" + username + "/password.txt", password, function(err2) {
+					if (err2) {
+						console.log(err2);
+						res.redirect("register.html");
+					} else {
+						console.log("file written");
+						res.redirect("login.html");
+					}
+				});
+			}
+		});
+	}
 });
 
 
