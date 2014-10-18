@@ -4,6 +4,8 @@ var ctx = canvas.getContext("2d");
 var WIDTH = canvas.width;
 var HEIGHT = canvas.height;
 var SIZE = 20;
+var MAX_X = WIDTH / SIZE;
+var MAX_Y = HEIGHT / SIZE;
 
 var Germ = function(x, y, health, team) {
     this.x = x;

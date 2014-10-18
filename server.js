@@ -57,6 +57,8 @@ app.post('/verify', function (req, res) {
 				if(err2) {
 					console.log(err2);
 				} else {
+                    console.log(password);
+                    console.log(passwordInStore);
 					if (password == passwordInStore){
 						res.sendFile(__dirname + '/client/html/index.html');
 					} else {
