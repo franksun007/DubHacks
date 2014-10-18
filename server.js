@@ -5,6 +5,7 @@ var fs = require('fs');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var handlebars = require("handlebars");
+var vm = require('vm');
 
 app.use(express.static(__dirname + '/client/'));
 app.use(bodyParser());
