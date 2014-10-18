@@ -26,6 +26,7 @@ app.post('/register', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	password = hash(password);
+	console.log("register passwd:" + password);
 	console.log("making directory " + username);
 	fs.mkdir("client/users/" + username, function(err) {
 		if (err) {
@@ -48,15 +49,17 @@ app.post('/verify', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	password = hash(password);
+	console.log("verify passwd:" + password);
 	fs.readdir("client/users/" + username, function(err) {
 		if(err) {
 			console.log(err);
 		} else {
 			console.log("checking the password");
-			passwordInStore = fs.open("client/users/" + username + "/password.txt", 'r', function(err2){
+			var passwordInStore = fs.readFile("client/users/" + username + "/password.txt", function(err2){
 				if(err2) {
 					console.log(err2);
 				} else {
+					console.log(passwordInStore);
 					if (password == passwordInStore){
 						res.sendFile(__dirname + '/client/html/index.html');
 					} else {
