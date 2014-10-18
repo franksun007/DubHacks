@@ -14,7 +14,7 @@ app.get('/form', function (req, res) {
 	res.sendFile(__dirname + '/client/html/form.html');
 });
 
-app.post('/verify', function (req, res) {
+app.post('/register', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
 	password = hash(password);
