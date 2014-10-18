@@ -16,6 +16,7 @@
         </div>
         <div>
             <button id="start">START</button>
+            <button id="stop" disabled="true">PAUSE</button>
         </div>
         <div>
             <canvas id="canvas" width="800" height="600"></canvas>
@@ -25,10 +26,19 @@
         <script src='/js/game.js'></script>
 
         <script>
+            var intervalID;
             document.getElementById("start").onclick = function() {
-                setInterval(gs.update, 1000/30);
-                document.getElementById("start").innerHTML = "SPEEDING UP";
+                intervalID = setInterval(gs.update, 1000/30);
+                document.getElementById("stop").removeAttribute('disabled');
+                document.getElementById("start").setAttribute("disabled", "true");
             };
+        </script>
+        <script>
+            document.getElementById("stop").onclick = function() {
+                clearInterval(intervalID);
+                document.getElementById("start").removeAttribute('disabled');
+                document.getElementById("stop").setAttribute("disabled", "true");
+            }
         </script>
     </body>
 

@@ -43,7 +43,7 @@ var Germ = function(x, y, health, team) {
         ctx.beginPath();
         ctx.arc(this.x*SIZE + SIZE/2, this.y*SIZE + SIZE/2, SIZE/2 - 2, Math.PI, Math.PI*2, true); 
         ctx.closePath();
-        ctx.stroke();
+        ctx.fill();
     }
 };
 
