@@ -49,3 +49,8 @@ textarea {
 #box {
 	margin-top: 15px;
 }
+
+pre {
+	text-align: left;
+	font: monospace;
+}
