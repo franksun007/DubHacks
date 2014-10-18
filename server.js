@@ -69,7 +69,7 @@ app.get('/select', function (req, res) {
 		} else {
 			for (var i = 0; i < links.length; i++) {
 				
-				fs.appendFileSync('server/links.txt', link); 
+				fs.appendFileSync('server/links.txt', links); 
 			}
 			res.sendFile(__dirname + '/client/html/select.html');
 		}
