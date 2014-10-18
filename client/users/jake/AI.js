@@ -1,1 +1,1 @@
-hello
+{ "get_next_moves" : function(germs) { return {"direction":"left", "command":"move"}; } }
