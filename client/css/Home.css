@@ -11,7 +11,7 @@ body {
 	background-color: #E2FADE;
 	font-size: 14pt;
 	font-family: Calibri;
-	color: yellow;
+	color: black;
 }
 
 ul {
@@ -23,7 +23,7 @@ ul {
 
 
 textarea {
-	background-color: yellow;
+	background-color: black;
 	font-size: 12pt;
 }
 
