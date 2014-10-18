@@ -3,15 +3,9 @@ h1 {
 	font-size: 40pt;
 	background-color: yellow;
 	padding: 10px;
-	
-}
-
-#logo1 {
-	padding-left: 50px;
-}
-
-#logo2 {
-
+	margin-top: 0px;
+	background: linear-gradient(yellow, #E2FADE);
+	padding-bottom: 50px
 }
 
 body {
@@ -20,6 +14,7 @@ body {
 	font-size: 14pt;
 	font-family: Calibri;
 	color: black;
+	margin: 0px;
 }
 
 ul {
