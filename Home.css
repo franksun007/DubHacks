@@ -11,8 +11,10 @@ body {
 	background-color: #E2FADE;
 	font-size: 14pt;
 	font-family: Calibri;
-	color: yellow;
+	color: #8ADADE;
 }
+
+
 
 ul {
 	text-align: center;
@@ -23,8 +25,9 @@ ul {
 
 
 textarea {
-	background-color: yellow;
+	background-color: #8ADADE;
 	font-size: 12pt;
+	font-family: Calibri;
 }
 
 #box {
@@ -50,7 +53,7 @@ body {
 <<<<<<< Local Changes
 
 textarea {
-	background-color: yellow;
+	background-color: #8ADADE;
 	font-size: 12pt;
 =======
 ul {
@@ -91,8 +94,8 @@ body {
 	text-align: center;
 	background-color: #E2FADE;
 	font-size: 14pt;
-	font-family: Arial;
-	color: yellow;
+	font-family: Calibri;
+	color: #8ADADE;
 }
 
 
