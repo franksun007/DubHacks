@@ -49,6 +49,10 @@ app.get('/index.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/index.html');
 });
 
+app.get('/indexj.html', function (req, res) {
+	res.sendFile(__dirname + '/client/html/indexj.html');
+});
+
 app.get('/js/:filename', function(req, res) {
     res.sendFile('client/js/' + req.params.filename);
 });
@@ -67,10 +71,11 @@ app.get('/select', function (req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			for (var i = 0; i < links.length; i++) {
+			fs.writeFile('server/links.txt', links);
+			//for (var i = 0; i < links.length; i++) {
 				
-				fs.appendFileSync('server/links.txt', link); 
-			}
+			//	fs.appendFileSync('server/links.txt', link); 
+			//}
 			res.sendFile(__dirname + '/client/html/select.html');
 		}
 	})

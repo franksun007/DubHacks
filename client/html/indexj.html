@@ -1,0 +1,62 @@
+<!-- Home page for DubHacks game -->
+<!DOCTYPE HTML> 
+<html>
+	<head id="indexbanner">
+		<link href="../css/Home.css" type="text/css" rel="stylesheet" />
+		<link href="https://raw.githubusercontent.com/PhearTheCeal/DubHacks/master/client/logo.png" type="image/png" rel="icon">
+	</head>
+	<body>
+		<title>GermaCodia</title>
+		<div id="banner">
+			<h1><img src="https://raw.githubusercontent.com/PhearTheCeal/DubHacks/master/client/mirror.png" alt="logo2" height="100" width="100"> GermaCodia <img src="https://raw.githubusercontent.com/PhearTheCeal/DubHacks/master/client/logo.png" alt="logo2" height="100" width="100"></h1>
+		</div>
+
+		<div>
+			<img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcToNMoMffT9N_w8Qwj3MeKW3UMbMya1j-aGYJrWfe4o67nbCMNuHRmf6V35">
+		</div>
+
+
+		<div id="rules">
+			<h2> Rules: </h2>	
+			<ul>
+				<li> <strong>1)</strong> You will play against another competitor to take over the world</li>
+				<li> <strong>2)</strong> The possibilites are endless, customize your character with JavaScript</li>
+				<li> <strong>3)</strong> Your character can either move left, right, up, down, or split</li>
+				<li> <strong>4)</strong> Each character has health and battles occur when characters collide</li>
+				<li> <strong>5)</strong> The winner of each battle is based on who has more health</li> 
+				<li> <strong>6)</strong> Splitting causes your character to clone himself and make two</li>
+				<li> <strong>7)</strong> The goal is to destroy the other opponent and conquer the world </li>
+			</ul>
+		</div>
+		<h3> Good luck! </h3>
+		<form action="/submit" method="post">
+			Submit JavaScript below:
+			<div id="box">
+				<textarea rows ="20" cols="65" name="userCode" placeholder="Place code here (will rewrite old version)" ></textarea>
+			</div>
+			<input type="submit" value="Submit!"/>
+		</form>
+		<a href="select">I'm ready! Let's battle!</a>
+		<div>
+			<h2>Sample Code goes here</h2>
+			<p>-------------------------------------------------------------</p>
+			<pre>
+// This is a total random germ move randomly and don't even care what's going on
+// But it is AWESOME.
+{
+	"get_next_moves": function(germs) {
+		var command = [];
+		for (var i = 0; i &lt; germs.length; i++) {
+			var direction = ["left", "right", "up", "down"];
+	    	var action = ["move", "split"];
+			var actionindex = parseInt(Math.random() * 2);
+			var directionindex = parseInt(Math.random() * 4);
+			command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
+    	}
+		return command;
+	}
+}
+</pre>
+		</div>
+	</body>
+</html>
