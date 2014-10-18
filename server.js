@@ -6,7 +6,7 @@ app.use(express.static(__dirname + '/client/'));
 app.use(bodyParser());
 
 app.get('/', function (req, res) {
-	res.sendFile(__dirname + '/client/html/index.html');
+	res.sendFile(__dirname + '/client/html/login.html');
 });
 
 app.get('/form', function (req, res) {
