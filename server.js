@@ -30,6 +30,25 @@ app.get('/index.html', function (req, res) {
 	res.sendFile(__dirname + '/client/html/index.html');
 });
 
+app.get('/select', function (req, res) {
+	fs.readdir('client/users/', function (err, links) {
+		if (err) {
+			console.log(err);
+		} else {
+			fs.writeFile('server/links.txt', links, function (err) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log("links are up! Yay!");
+					console.log(links);
+					res.redirect("select.html");
+				}
+			})
+		}
+	})
+})
+
+// for registration
 app.post('/register', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
@@ -63,6 +82,8 @@ app.post('/register', function (req, res) {
 	});
 });
 
+
+// for turning in js code
 app.post('/submit', function (req, res){
 	if (req.session.username) {
 		var username = req.session.username;
@@ -77,12 +98,13 @@ app.post('/submit', function (req, res){
 			redirect("failure.html"); 
 		} else {
 			console.log("file written");
-			res.redirect("select.html");
+			res.redirect("/select");
 		}	
 	});
 
 });
 
+// for login
 app.post('/verify', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
