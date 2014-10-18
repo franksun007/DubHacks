@@ -14,11 +14,16 @@
         <div id="banner">
             <h1><img src="https://raw.githubusercontent.com/PhearTheCeal/DubHacks/master/client/mirror.png" alt="logo2" height="100" width="100"> GermaCodia <img src="https://raw.githubusercontent.com/PhearTheCeal/DubHacks/master/client/logo.png" alt="logo2" height="100" width="100"></h1>
         </div>
-        <canvas id="canvas" width="800" height="600"></canvas>
+        <div>
+            <button id="start">START</button>
+        </div>
+        <div>
+            <canvas id="canvas" width="800" height="600"></canvas>
+        </div>
         <script src='/client/users/{{enemy}}/AI.js/2'></script>
         <script src='/client/users/{{myname}}/AI.js/1'></script>
         <script src='/js/game.js'></script>
-        <button id="start">START</button>
+
         <script>
             document.getElementById("start").onclick = function() {
                 setInterval(gs.update, 1000/30);
