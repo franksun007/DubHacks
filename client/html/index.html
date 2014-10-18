@@ -37,22 +37,22 @@
 			<h2>Sample Code goes here</h2>
 			<p>-------------------------------------------------------------</p>
 			<pre>
-					// This is a total random germ move randomly and don't even care what's going on
-					// But it is AWESOME.
-					{
-						"get_next_moves": function(germs) {
-							var command = [];
-							for (var i = 0; i &lt; germs.length; i++) {
-								var direction = ["left", "right", "up", "down"];
-								var action = ["move", "split"];
-								var actionindex = parseInt(Math.random() * 2);
-								var directionindex = parseInt(Math.random() * 4);
-								command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
-							}
-							return command;
-						}
-					}
-			</pre>
+// This is a total random germ move randomly and don't even care what's going on
+// But it is AWESOME.
+{
+	"get_next_moves": function(germs) {
+		var command = [];
+		for (var i = 0; i &lt; germs.length; i++) {
+			var direction = ["left", "right", "up", "down"];
+	    	var action = ["move", "split"];
+			var actionindex = parseInt(Math.random() * 2);
+			var directionindex = parseInt(Math.random() * 4);
+			command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
+    	}
+		return command;
+	}
+}
+</pre>
 		</div>
 	</body>
 </html>
