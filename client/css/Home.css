@@ -15,12 +15,14 @@ body {
 	font-family: Calibri;
 	color: black;
 	margin: 0px;
+	padding-bottom: 50px;
 }
 
 ul {
-	text-align: center;
+	text-align: justify;
 	font-family: Calibri;
 	list-style-type: none;
+	padding-left: 675px;
 }
 
 textarea {
