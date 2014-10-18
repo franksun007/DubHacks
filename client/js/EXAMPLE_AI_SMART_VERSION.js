@@ -28,7 +28,7 @@ function() {
 				command[i] = {"command":"move", "direction":"right"}; 			
 			}
 			else {
-				var direction = {"left", "right", "up", "down"};
+				var direction = ["left", "right", "up", "down"];
 				var index = parseInt(Math.random() * 4);
 				command[i] = {"command":"split", "direction": direction[index]};
 			}
