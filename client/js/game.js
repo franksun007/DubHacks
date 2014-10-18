@@ -255,6 +255,3 @@ var g2 = [new Germ(15,10,100,2),new Germ(15,15,100,2),new Germ(15,17,100,2)];
 var some_food = [new Food(5, 5)];
  
 var gs = new GameServer(g1, g2, some_food, AI1, AI2, 20);
-
-setInterval(gs.update, 1000/30);
-
