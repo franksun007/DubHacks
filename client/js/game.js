@@ -3,6 +3,7 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var WIDTH = canvas.width;
 var HEIGHT = canvas.height;
+var SIZE = 20;
 
 var Germ = function(x, y, health, team) {
     this.x = x;
@@ -17,7 +18,7 @@ var Germ = function(x, y, health, team) {
         } else {
             ctx.fillStyle = "#00F";
         }
-        ctx.fillRect(this.x, this.y, 20, 20);
+        ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
     }
 }
 
@@ -28,7 +29,7 @@ var Food = function(x, y) {
 
     this.render = function() {
         ctx.fillStyle = "#FFF";
-        ctx.fillRect(this.x, this.y, 20, 20);
+        ctx.fillRect(this.x*SIZE, this.y*SIZE, SIZE, SIZE);
     }
 }
 
@@ -171,12 +172,13 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
             var new_guy = issue_command(commands1[i], germs1[i]);
             if (new_guy) germs1.push(new_guy);
         }
-        //TODO update game state (look at stuff in map and see if overlap)
+        this.handle_overlaps(germs1, germs2);
         for (var i = 0; i < germs2.length; i++) {
             var new_guy = issue_command(commands2[i], germs2[i]);
             if (new_guy) germs2.push(new_guy);
         }
-        //TODO update game state (look at stuff in map and see if overlap)
+        this.handle_overlaps(germs2, germs1);
+        this.render();
     }
 
     this.handle_overlaps = function(my_germs, enemy_germs) {
@@ -197,8 +199,22 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
                 }
             }
         }
-        //TODO remove eaten food
-        //TODO remove germs with <= 0 hp
+        for (var i = 0; i < food.length; i++) {
+            if (food[i].eaten) {
+                food.splice(i, 1);
+            }
+        }
+
+        for (var i = 0; i < germs1.length; i++) {
+            if (germs1[i].health <= 0) {
+                germs1.splice(i, 1);
+            }
+        }
+        for (var i = 0; i < germs2.length; i++) {
+            if (germs2[i].health <= 0) {
+                germs2.splice(i, 1);
+            }
+        }
     }
 }
 
@@ -220,9 +236,38 @@ function eat(germ, food) {
    germ.health += 50;
 }
 
-function main() {
-    //TODO
-}
+// Some test data for testing
+var g1 = [new Germ(0,0,100,1),new Germ(1,0,100,1),new Germ(2,0,100,1)];
+var g2 = [new Germ(0,5,100,2),new Germ(1,5,100,2),new Germ(2,5,100,2)];
+var some_food = [new Food(5, 5)];
+var first_AI = function() {
+    this.get_next_moves = function(germs) {
+        var command = [];
+        for (var i = 0; i < germs.length; i++) {
+            var direction = ["left", "right", "up", "down"];
+            var action = ["move", "split"];
+            var actionindex = parseInt(Math.random() * 2);
+            var directionindex = parseInt(Math.random() * 4);
+            command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
+        }
+        return command;
+    }
+};
+var second_AI = function() {
+    this.get_next_moves = function(germs) {
+        var command = [];
+        for (var i = 0; i < germs.length; i++) {
+            var direction = ["left", "right", "up", "down"];
+            var action = ["move", "split"];
+            var actionindex = parseInt(Math.random() * 2);
+            var directionindex = parseInt(Math.random() * 4);
+            command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
+        }
+        return command;
+    }
+};
+ 
+var gs = new GameServer(g1, g2, some_food, first_AI, second_AI, 20);
 
-setInterval(main, 1000/30);
+setInterval(gs.update, 1000/30);
 
