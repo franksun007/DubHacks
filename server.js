@@ -60,6 +60,19 @@ app.post('/register', function (req, res) {
 	});
 });
 
+app.post('/submit', function (req, res){
+	var username = req.session.username;
+	var code = req.body.code;
+	console.log("fields set");
+	fs.writeFile("/client/users/" + username + "/AI.js", code, function (err) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log("file written");
+		}
+	})
+});
+
 app.post('/verify', function (req, res) {
 	var username = req.body.username;
 	var password = req.body.password;
