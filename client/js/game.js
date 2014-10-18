@@ -157,8 +157,10 @@ var GameServer = function(germs1, germs2, food, AI1, AI2, map_size) {
             germ.x += dx;
             germ.y += dy;
         } else if (command["command"] === "split") {
-            germ.health = germ.health / 2;
-            return new Germ(germ.x + dx, germ.y + dy, germ.health / 2, germ.team);
+            if (germ.health >= 2) {
+                germ.health = germ.health / 2;
+                return new Germ(germ.x + dx, germ.y + dy, germ.health / 2, germ.team);
+            }
         } 
         return false;
     };
@@ -248,8 +250,8 @@ var first_AI = {
         var command = [];
         for (var i = 0; i < germs.length; i++) {
             var direction = ["left", "right", "up", "down"];
-            var action = ["move"];
-            var actionindex = parseInt(Math.random() * 1);
+            var action = ["move", "split"];
+            var actionindex = parseInt(Math.random() * 2);
             var directionindex = parseInt(Math.random() * 4);
             command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
         }
@@ -261,8 +263,8 @@ var second_AI = {
         var command = [];
         for (var i = 0; i < germs.length; i++) {
             var direction = ["left", "right", "up", "down"];
-            var action = ["move"];
-            var actionindex = parseInt(Math.random() * 1);
+            var action = ["move", "split"];
+            var actionindex = parseInt(Math.random() * 2);
             var directionindex = parseInt(Math.random() * 4);
             command[i] = {"command":action[actionindex], "direction": direction[directionindex]};
         }
